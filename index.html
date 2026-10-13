@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>8 Hours to Apex | An original cyberpunk anime series</title>
+<meta name="description" content="Eight hours. Four fractured minds. One militarized corporate state. A data courier races to the city's core before the weapon in her head destroys her.">
+<meta name="theme-color" content="#0e1218">
+
+<!-- Social sharing. Once your domain is final, change the image URL below to the full address,
+     for example https://yourdomain.com/images/og-image.jpg  (social sites need the full address). -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="8 Hours to Apex">
+<meta property="og:description" content="Eight hours. Four fractured minds. One militarized corporate state.">
+<meta property="og:image" content="images/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230e1218'/%3E%3Ctext x='16' y='24' font-size='24' text-anchor='middle' fill='%23ff4338' font-family='monospace' font-weight='bold'%3E8%3C/text%3E%3C/svg%3E">
+
+<link rel="preload" href="fonts/big-shoulders-display-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+
+<style>
+/* ---------- Fonts (self-hosted, no outside requests) ---------- */
+@font-face{font-family:"Big Shoulders Display";src:url("fonts/big-shoulders-display-latin-wght-normal.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("fonts/newsreader-latin-wght-normal.woff2") format("woff2");font-weight:200 800;font-style:normal;font-display:swap}
+@font-face{font-family:"Newsreader";src:url("fonts/newsreader-latin-wght-italic.woff2") format("woff2");font-weight:200 800;font-style:italic;font-display:swap}
+@font-face{font-family:"IBM Plex Mono";src:url("fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2");font-weight:500;font-style:normal;font-display:swap}
+
+/* ---------- Tokens ---------- */
+:root{
+  --slate:#0e1218;      /* the Marrow at night */
+  --slate-2:#151b23;    /* raised sections */
+  --fog:#d3d9e0;        /* main text */
+  --rain:#9aa5b2;       /* secondary text */
+  --rust:#a0502c;       /* oxidized pipework, structure only */
+  --hud:#ff4338;        /* Dean's HUD. Used only for readouts and clock. */
+  --siren-pink:#ff4fd8;
+  --siren-cyan:#38e8ff;
+  --scholar:#8dffb0;
+  --gutter:clamp(1.25rem,5vw,4rem);
+  --display:"Big Shoulders Display","Oswald","Arial Narrow",Impact,sans-serif;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{margin:0;background:var(--slate);color:var(--fog);font-family:var(--serif);font-size:1.125rem;line-height:1.65;font-weight:380;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+h1,h2,h3,p,ol,figure,blockquote{margin:0}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--fog);outline-offset:3px}
+
+.skip{position:absolute;left:-999px;top:0;background:var(--fog);color:var(--slate);padding:.6rem 1rem;z-index:20;font-family:var(--display);font-weight:700}
+.skip:focus{left:0}
+
+/* ---------- Top bar with the running clock ---------- */
+.bar{position:fixed;inset:0 0 auto 0;z-index:10;height:56px;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:0 var(--gutter);background:rgba(14,18,24,.84);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.bar-title{font-family:var(--display);font-weight:800;font-size:1.35rem;letter-spacing:.03em;text-decoration:none;text-transform:uppercase}
+.bar nav{display:flex;gap:1.75rem;margin-left:auto}
+.bar nav a{font-family:var(--display);font-weight:600;font-size:1.1rem;letter-spacing:.04em;text-decoration:none;color:var(--rain)}
+.bar nav a:hover{color:var(--fog)}
+.clock{font-family:var(--mono);font-weight:500;font-size:1.05rem;letter-spacing:.06em;color:var(--hud);text-shadow:0 0 14px rgba(255,67,56,.5);min-width:7.5ch;text-align:right}
+.progress{position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--hud);transform-origin:left center;transform:scaleX(0)}
+@media (max-width:760px){.bar nav{display:none}}
+
+/* ---------- Shared section frame ---------- */
+.s{padding:clamp(4.5rem,10vw,8.5rem) var(--gutter)}
+.wrap{max-width:1180px;margin:0 auto}
+h2{font-family:var(--display);font-weight:800;font-size:clamp(2.8rem,6.4vw,5rem);line-height:.95;letter-spacing:.005em}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;padding:calc(56px + 2rem) var(--gutter) clamp(2.5rem,7vw,5rem)}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 38%}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--slate) 3%,rgba(14,18,24,.74) 36%,rgba(14,18,24,.22) 78%)}
+.hero-inner{position:relative;z-index:1;width:100%;max-width:1180px;margin:0 auto}
+.hud{display:flex;flex-wrap:wrap;gap:.25rem 1.75rem;margin-bottom:1.5rem;font-family:var(--mono);font-weight:500;font-size:.95rem;letter-spacing:.05em;color:var(--hud);text-shadow:0 1px 3px rgba(0,0,0,.95),0 0 14px rgba(255,67,56,.4)}
+h1{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(4.5rem,22vw,15rem);line-height:.82;letter-spacing:-.005em}
+h1 span{display:block}
+.tagline{margin-top:clamp(1.5rem,3vw,2.25rem);max-width:22em;font-family:var(--display);font-weight:600;font-size:clamp(1.5rem,3.3vw,2.4rem);line-height:1.08;letter-spacing:.012em}
+.sub{margin-top:1rem;max-width:34em;color:var(--rain)}
+.cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+
+.btn{display:inline-flex;align-items:center;min-height:3rem;padding:.7rem 1.5rem;border:1.5px solid var(--fog);border-radius:2px;font-family:var(--display);font-weight:700;font-size:1.2rem;letter-spacing:.05em;text-decoration:none;cursor:pointer;transition:background-color .15s,color .15s}
+.btn-solid{background:var(--fog);color:var(--slate)}
+.btn-solid:hover{background:#fff;border-color:#fff}
+.btn-line{background:transparent;color:var(--fog)}
+.btn-line:hover{background:var(--fog);color:var(--slate)}
+.btn[hidden]{display:none}
+
+/* ---------- Logline ---------- */
+.logline{background:var(--slate)}
+.logline p{max-width:24em;font-size:clamp(1.75rem,4.3vw,3.2rem);line-height:1.2;font-weight:350}
+
+/* ---------- Premise ---------- */
+.premise{background:var(--slate-2)}
+.premise-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(2.5rem,7vw,6.5rem);align-items:center}
+.premise-copy h2{margin-bottom:1.75rem}
+.premise-copy p{max-width:34em}
+.premise-copy p+p{margin-top:1.15rem}
+.plate img{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:50% 92%;background:var(--slate)}
+.plate-tall img{aspect-ratio:9/16;object-position:50% 50%}
+.plate figcaption{margin-top:.75rem;font-style:italic;font-size:.98rem;color:var(--rain)}
+@media (max-width:860px){
+  .premise-grid{grid-template-columns:1fr}
+  .plate{max-width:30rem}
+}
+
+/* ---------- Route: the clock, district by district ---------- */
+.route{background:var(--slate)}
+.route-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:clamp(2rem,6vw,5.5rem);align-items:start}
+.route-grid .plate{position:sticky;top:88px}
+@media (max-width:860px){.route-grid{grid-template-columns:1fr}.route-grid .plate{display:none}}
+.route-intro{margin-top:1rem;max-width:30em;color:var(--rain)}
+.stops{--pad:clamp(1.25rem,3.4vw,2.25rem);list-style:none;margin:3.25rem 0 0;padding:0 0 0 var(--pad);border-left:2px solid var(--rust)}
+.stops li{position:relative;display:grid;grid-template-columns:9.5rem minmax(0,1fr);gap:.25rem 1.5rem;padding-bottom:3rem}
+.stops li:last-child{padding-bottom:0}
+.stops li::before{content:"";position:absolute;left:calc(-1 * var(--pad));top:.82rem;width:calc(var(--pad) * .55);height:2px;background:var(--rust)}
+.stops time{font-family:var(--mono);font-weight:500;font-size:1.15rem;letter-spacing:.04em;color:var(--hud);padding-top:.25rem}
+.stops h3{font-family:var(--display);font-weight:800;font-size:clamp(2rem,4vw,2.9rem);line-height:1}
+.stops p{margin-top:.5rem;max-width:34em;color:var(--rain)}
+.stops .final h3{font-size:clamp(2.4rem,5vw,3.8rem)}
+.stops .final p{color:var(--fog)}
+@media (max-width:640px){
+  .stops li{grid-template-columns:1fr}
+}
+
+/* ---------- Cast ---------- */
+.cast{background:var(--slate-2)}
+.dean{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2.5rem,7vw,6rem);align-items:center}
+.dean-figure img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.dean-figure figcaption{margin-top:.75rem;font-style:italic;font-size:.98rem;color:var(--rain);max-width:26em}
+.dean-role{margin-top:.6rem;font-style:italic;color:var(--rain)}
+.dean-text p{max-width:34em}
+.dean-text h2+.dean-role+p{margin-top:1.5rem}
+.code{margin-top:2.25rem;max-width:20em;padding-left:1.25rem;border-left:2px solid var(--rust);font-size:clamp(1.5rem,2.8vw,2.1rem);line-height:1.25;font-style:italic;font-weight:400}
+.code footer{margin-top:.75rem;font-size:.98rem;font-style:normal;color:var(--rain)}
+@media (max-width:860px){
+  .dean{grid-template-columns:1fr}
+  .dean-figure{max-width:30rem}
+}
+
+.alters-head{margin-top:clamp(5rem,10vw,8rem)}
+.alters-head p{margin-top:1.25rem;max-width:32em;color:var(--rain)}
+.modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(.75rem,1.6vw,1.25rem);margin-top:2.5rem}
+.mode{position:relative;display:flex;flex-direction:column;gap:.5rem;padding:clamp(1.5rem,3vw,2.25rem);min-height:20rem}
+.mode h3{font-family:var(--display);font-weight:900;text-transform:uppercase;font-size:clamp(3rem,5.4vw,4.4rem);line-height:.88}
+.mode .role{font-family:var(--display);font-weight:600;font-size:1.5rem;letter-spacing:.03em;color:var(--rain)}
+.mode p:last-child{margin-top:auto;padding-top:1.25rem;max-width:22em}
+@media (min-width:861px){.mode h3{min-height:1.76em}}
+@media (max-width:860px){.modes{grid-template-columns:1fr}.mode{min-height:0}}
+
+/* Havoc: hyper-inked black, ragged edge */
+.mode-havoc{background:#06070a;color:#f2f2f2;clip-path:polygon(0 1.5%,100% 0,98.5% 98%,2% 100%)}
+.mode-havoc h3{filter:url(#ink);text-shadow:4px 4px 0 #000,-2px 0 0 #000}
+/* The Siren: light smears, neon bleeds */
+.mode-siren{background:#100a18;background-image:linear-gradient(115deg,rgba(255,79,216,.16),rgba(255,79,216,0) 45%,rgba(56,232,255,.13))}
+.mode-siren h3{text-shadow:-3px 0 var(--siren-pink),3px 0 var(--siren-cyan)}
+/* The Scholar: green phosphor vectors */
+.mode-scholar{background-color:#07110c;background-image:linear-gradient(rgba(141,255,176,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(141,255,176,.08) 1px,transparent 1px);background-size:30px 30px}
+.mode-scholar h3{color:transparent;-webkit-text-stroke:1.5px var(--scholar)}
+
+/* ---------- Follow ---------- */
+.follow{position:relative;overflow:hidden;min-height:78vh;min-height:78svh;display:flex;align-items:center;background:var(--slate)}
+.follow-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 40%}
+.follow::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(14,18,24,.94) 8%,rgba(14,18,24,.7) 50%,rgba(14,18,24,.4))}
+.follow .wrap{position:relative;z-index:1;width:100%}
+.follow p{max-width:30em;margin-top:1.25rem}
+.follow .cta{margin-top:2rem}
+.soon{color:var(--rain)}
+
+/* ---------- Footer ---------- */
+.foot{padding:2.5rem var(--gutter);background:var(--slate);color:var(--rain);font-size:.95rem}
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+.foot p{max-width:42em}
+</style>
+</head>
+
+<body>
+<a class="skip" href="#logline">Skip to content</a>
+
+<!-- Ink texture used on Havoc's name -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <filter id="ink" x="-5%" y="-10%" width="110%" height="120%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</svg>
+
+<div class="bar">
+  <a class="bar-title" href="#top">8 Hours to Apex</a>
+  <nav aria-label="Sections">
+    <a href="#premise">Premise</a>
+    <a href="#route">Route</a>
+    <a href="#cast">Cast</a>
+    <a href="#follow">Follow</a>
+  </nav>
+  <!-- The clock runs down as you scroll: 08:00:00 at the top, 00:00:00 at the bottom. -->
+  <div class="clock" id="clock" aria-hidden="true">08:00:00</div>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+</div>
+
+<header class="hero" id="top">
+  <img class="hero-img" src="images/marrow-skyline.jpg" alt="" fetchpriority="high">
+  <div class="hero-inner">
+    <p class="hud"><span>[ STORAGE: 12 FLUX REMAINING ]</span><span>[ RENT DUE: 100 FLUX ]</span></p>
+    <h1><span>8 Hours</span><span>to Apex</span></h1>
+    <p class="tagline">Eight hours. Four fractured minds. One militarized corporate state.</p>
+    <p class="sub">A data courier carries a decaying cyber-weapon in her head. She has eight hours to reach the city's core and get it out.</p>
+    <div class="cta">
+      <a class="btn btn-solid" href="#follow" data-link="webtoon" data-soon="Chapter 1 is on the way">Read on WEBTOON</a>
+      <a class="btn btn-line" href="#premise">Start with the premise</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="s logline" id="logline" aria-label="Logline">
+    <div class="wrap">
+      <p>Forcibly injected with a decaying, mind-splintering cyber-weapon, a cynical data courier has exactly eight hours to breach a sovereign corporate state and infiltrate its mainframe before her brain liquefies.</p>
+    </div>
+  </section>
+
+  <section class="s premise" id="premise">
+    <div class="wrap premise-grid">
+      <div class="premise-copy">
+        <h2>The Iron Expanse</h2>
+        <p>Thirty years ago, corporate syndicates and rebel hacker coalitions tore the global network apart. One company, OmniNexus, walked out of the wreckage owning the grid, the automation, and the data. It poured concrete over the ruins and built a sovereign state on top, then called it the Iron Expanse.</p>
+        <p>Dean is a freelance data courier with one rule: never look at the payload. Then a dying syndicate boss injects hers straight into her skull, and starts the clock.</p>
+        <p>The code doesn't stay in one piece. It splits into three voices that all want the wheel. She has eight hours to cross six districts, one fortress bridge, and a corporation that will burn whole blocks to stop her.</p>
+      </div>
+      <figure class="plate">
+        <img src="images/dean-ledge.jpg" alt="Dean sits on a rooftop ledge in the rain with her back to us, looking out over the industrial sprawl of the Marrow." width="720" height="1280" loading="lazy">
+        <figcaption>Dean, above the Marrow.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="s route" id="route">
+    <div class="wrap route-grid">
+      <div>
+      <h2>The route</h2>
+      <p class="route-intro">Six districts, one direction, and a clock that doesn't stop. Each hour takes Dean closer to the center.</p>
+      <ol class="stops">
+        <li>
+          <time>08:00</time>
+          <div><h3>The Marrow</h3><p>Subterranean trenches and slums. Where the run begins.</p></div>
+        </li>
+        <li>
+          <time>07:00</time>
+          <div><h3>The Kiln</h3><p>Industrial deep refineries, toxic air, and droids that never stop working.</p></div>
+        </li>
+        <li>
+          <time>06:00</time>
+          <div><h3>The Concourse</h3><p>A subaquatic rail line under the bay. No signal, no eyes, and no way out if something goes wrong.</p></div>
+        </li>
+        <li>
+          <time>05:00</time>
+          <div><h3>The Flood</h3><p>A lawless basin of floating night markets, built over the crater the Data Wars left behind.</p></div>
+        </li>
+        <li>
+          <time>04:00</time>
+          <div><h3>The Span</h3><p>A fortress bridge bristling with automated guns, and the last wall before the capital.</p></div>
+        </li>
+        <li class="final">
+          <time>03:00–00:00</time>
+          <div><h3>The Apex</h3><p>The central citadel and the OmniNexus mainframe. The clock runs out here.</p></div>
+        </li>
+      </ol>
+      </div>
+      <figure class="plate plate-tall">
+        <img src="images/marrow-slums.jpg" alt="Looking straight up between stacked slum towers, power cables strung across a narrow strip of rain-grey sky." width="720" height="1280" loading="lazy">
+        <figcaption>Looking up from the Marrow.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="s cast" id="cast">
+    <div class="wrap">
+      <div class="dean">
+        <figure class="dean-figure">
+          <img src="images/dean-portrait.jpg" alt="Close portrait of Dean in the rain, a circuit-trace marking running across the side of her face." width="832" height="1040" loading="lazy">
+          <figcaption>The circuit marking is where her implant meets bone, and where her HUD begins.</figcaption>
+        </figure>
+        <div class="dean-text">
+          <h2>Dean</h2>
+          <p class="dean-role">Freelance data courier, age 22</p>
+          <p>Hard-bitten, practical, and out of options. Dean has no cause and no interest in who rules the Iron Expanse. She's running because in eight hours the weapon in her skull will kill her.</p>
+          <blockquote class="code">
+            <p>Don't look at the payload. Don't ask who sent it. Never pick a side.</p>
+            <footer>Dean's courier code</footer>
+          </blockquote>
+        </div>
+      </div>
+
+      <div class="alters-head">
+        <h2>She isn't alone in there.</h2>
+        <p>The weapon split itself into three. Each one has its own way of surviving, and each one changes how the world looks when it takes over.</p>
+      </div>
+
+      <div class="modes">
+        <article class="mode mode-havoc">
+          <h3>Havoc</h3>
+          <p class="role">Offense</p>
+          <p>Aggression and kinetic threat-response. When Havoc surfaces, the world snaps to heavy black ink.</p>
+        </article>
+        <article class="mode mode-siren">
+          <h3>The Siren</h3>
+          <p class="role">Deception</p>
+          <p>Sensory misdirection and radar cloaking. When the Siren surfaces, light smears and the city blooms neon.</p>
+        </article>
+        <article class="mode mode-scholar">
+          <h3>The Scholar</h3>
+          <p class="role">Analysis</p>
+          <p>Tactical pathfinding and hacking. When the Scholar surfaces, the world resolves into green phosphor lines.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="s follow" id="follow">
+    <img class="follow-img" src="images/dean-seated.jpg" alt="" loading="lazy">
+    <div class="wrap">
+      <h2>Chapter 1 is in production.</h2>
+      <p>Follow along for release news and the first look at every new chapter.</p>
+      <div class="cta" id="follow-links">
+        <a class="btn btn-solid" data-link="webtoon" data-label="Read on WEBTOON" hidden>Read on WEBTOON</a>
+        <a class="btn btn-line" data-link="instagram" hidden>Instagram</a>
+        <a class="btn btn-line" data-link="tiktok" hidden>TikTok</a>
+        <a class="btn btn-line" data-link="youtube" hidden>YouTube</a>
+        <a class="btn btn-line" data-link="x" hidden>X</a>
+      </div>
+      <p class="soon" id="soon" hidden>Links go live with the first chapter.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>&copy; 2026 David Duran. 8 Hours to Apex, its story, and its characters are original works. All rights reserved.</p>
+    <a href="#top">Back to top</a>
+  </div>
+</footer>
+
+<script>
+/* =====================================================================
+   EDIT HERE: paste your links between the quotes, then save and re-upload.
+   Leave a link empty ("") and its button stays hidden until you add it.
+   ===================================================================== */
+var LINKS = {
+  webtoon:   "",   // your WEBTOON Canvas series URL
+  instagram: "",
+  tiktok:    "",
+  youtube:   "",
+  x:         ""
+};
+
+/* ---------- Buttons ---------- */
+(function () {
+  var anyLive = false;
+  document.querySelectorAll("[data-link]").forEach(function (el) {
+    var url = LINKS[el.getAttribute("data-link")];
+    if (url) {
+      el.href = url;
+      el.target = "_blank";
+      el.rel = "noopener";
+      el.hidden = false;
+      anyLive = true;
+    } else if (el.hasAttribute("data-soon")) {
+      el.textContent = el.getAttribute("data-soon");   // hero button before launch
+    }
+  });
+  document.getElementById("soon").hidden = anyLive;
+})();
+
+/* ---------- The clock: the page is the run ---------- */
+(function () {
+  var clock = document.getElementById("clock");
+  var bar = document.getElementById("progress");
+  var total = 8 * 3600;
+  var queued = false;
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function format(sec) {
+    return pad(Math.floor(sec / 3600)) + ":" + pad(Math.floor((sec % 3600) / 60)) + ":" + pad(sec % 60);
+  }
+  function update() {
+    queued = false;
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    var p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    clock.textContent = format(Math.round(total * (1 - p)));
+    bar.style.transform = "scaleX(" + p + ")";
+  }
+  function queue() {
+    if (!queued) { queued = true; window.requestAnimationFrame(update); }
+  }
+  window.addEventListener("scroll", queue, { passive: true });
+  window.addEventListener("resize", queue);
+  window.addEventListener("load", queue);
+  update();
+})();
+</script>
+</body>
+</html>
